@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>✈️ 智能旅行助手</title>
+<link rel="stylesheet" href="css/ios.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/marked@11/marked.min.js"></script>
+</head>
+<body>
+
+<!-- 状态栏 -->
+<div class="status-bar">
+  <span class="status-time" id="statusTime">9:41</span>
+  <span class="status-title">旅行助手</span>
+  <span class="status-battery">🔋</span>
+</div>
+
+<!-- 导航栏 -->
+<nav class="nav-bar">
+  <h1 class="nav-title">✈️ 智能旅行助手</h1>
+  <span class="nav-badge" id="navBadge">就绪</span>
+</nav>
+
+<!-- 主内容区 -->
+<main class="main-content" id="mainContent">
+
+  <!-- 💬 对话面板 -->
+  <section class="panel" id="chatPanel">
+    <div class="chat-messages" id="chatMessages">
+      <div class="welcome-card">
+        <div class="welcome-icon">✈️</div>
+        <h2>你好，我是旅行助手</h2>
+        <p>告诉我你的旅行需求，我来帮你规划</p>
+        <div class="quick-asks">
+          <button class="quick-btn" onclick="quickAsk('帮我规划今明两天杭州的旅行')">🏯 杭州2日游</button>
+          <button class="quick-btn" onclick="quickAsk('帮我规划从北京去成都的3天旅行，预算3000')">🐼 成都3日游</button>
+          <button class="quick-btn" onclick="quickAsk('帮我规划周末去上海的旅行')">🌆 上海周末游</button>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input-bar">
+      <input type="text" class="chat-input" id="chatInput"
+             placeholder="描述你的旅行需求..."
+             autocomplete="off">
+      <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- 🗺️ 地图面板 -->
+  <section class="panel hidden" id="mapPanel">
+    <div class="map-tabs" id="mapTabs">
+      <button class="map-tab active" data-day="all">全部</button>
+    </div>
+    <div class="map-wrapper">
+      <div class="map-container" id="mapContainer">
+        <div class="map-placeholder" id="mapPlaceholder">
+          <div style="font-size:48px;margin-bottom:12px;">🗺️</div>
+          <div style="font-size:16px;font-weight:600;margin-bottom:4px;">暂无路线图数据</div>
+          <div style="font-size:13px;color:#8E8E93;">请先切换到「对话」面板发送旅行需求</div>
+        </div>
+      </div>
+      <div class="map-info-panel" id="mapInfoPanel" style="display:none;">
+        <div class="info-header">
+          <h3 id="infoSpotName">景点详情</h3>
+          <button class="info-close" onclick="closeInfoPanel()">×</button>
+        </div>
+        <table class="info-table" id="infoTable"></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 📚 知识库面板 -->
+  <section class="panel hidden" id="knowledgePanel">
+    <div class="kb-header">
+      <h2>📚 知识库</h2>
+    </div>
+    <div class="kb-stats" id="kbStats">
+      <div class="kb-card">
+        <div class="kb-card-icon">💬</div>
+        <div class="kb-card-value" id="kbChatCount">--</div>
+        <div class="kb-card-label">对话记录</div>
+      </div>
+      <div class="kb-card">
+        <div class="kb-card-icon">📄</div>
+        <div class="kb-card-value" id="kbDocCount">--</div>
+        <div class="kb-card-label">旅游攻略</div>
+      </div>
+    </div>
+    <div class="kb-actions">
+      <button class="kb-btn danger" id="cleanupBtn" onclick="cleanupKnowledge()">
+        🗑️ 手动清理过期数据
+      </button>
+    </div>
+    <div class="kb-search">
+      <input type="text" class="kb-search-input" id="kbSearchInput"
+             placeholder="搜索知识库...">
+      <button class="kb-btn" onclick="searchKnowledge()">搜索</button>
+    </div>
+    <div class="kb-results" id="kbResults"></div>
+  </section>
+
+</main>
+
+<!-- Tab Bar -->
+<nav class="tab-bar">
+  <button class="tab-btn active" data-tab="chat" onclick="switchTab('chat')">
+    <span class="tab-icon">💬</span>
+    <span class="tab-label">对话</span>
+  </button>
+  <button class="tab-btn" data-tab="map" onclick="switchTab('map')">
+    <span class="tab-icon">🗺️</span>
+    <span class="tab-label">地图</span>
+  </button>
+  <button class="tab-btn" data-tab="knowledge" onclick="switchTab('knowledge')">
+    <span class="tab-icon">📚</span>
+    <span class="tab-label">知识库</span>
+  </button>
+</nav>
+
+<!-- Toast -->
+<div class="toast" id="toast" style="display:none"></div>
+
+<script src="js/utils.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/map.js"></script>
+<script src="js/knowledge.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
