@@ -76,11 +76,4 @@ python cli.py
 | POST | `/api/knowledge/search` | 知识库检索 |
 | GET | `/api/health` | 健康检查 |
 
-## 文档
-
-| 文件 | 用途 |
-|------|------|
-| [TECH_DOC.md](TECH_DOC.md) | 📝 技术答辩文档 (PPT 参考) |
-| [ARCHITECTURE_PLAN.md](ARCHITECTURE_PLAN.md) | 🏗️ 架构设计文档 |
-| [API_AND_FRONTEND_INTEGRATION.md](API_AND_FRONTEND_INTEGRATION.md) | 🔌 API 接口 & 前端接入 |
 
