@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+backend/venv/
+venv/
+
+# Environment
+backend/.env
+.env
+
+# ChromaDB
+data/chroma_db/
+*.chroma/
+
+# Model Cache
+data/models/
+
+# Generated Images
+data/images/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+data/logs/
+*.log
+
+# Frontend
+frontend/node_modules/
+
+# Test & Temp
+test_*.py
+*.tmp
+*.bak
+
+# Docs (excluded from repo)
+TECH_DOC.md
+RESUME.md
+*PLAN*.md
+API_AND_FRONTEND_INTEGRATION.md
